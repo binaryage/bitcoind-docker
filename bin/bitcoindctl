@@ -1,7 +1,8 @@
 #!/bin/bash
 
 set -e
-cd "$(dirname "$(readlink -f $0)")"/..
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$SCRIPT_DIR/.."
 . etc/env
 
 START="\
@@ -15,11 +16,11 @@ START="\
 "
 
 if [ "$1" = "serve" ]; then
-    START="$START -d -p $HOST_BITCOIND_P2P_PORT:8333 -p $HOST_BITCOIND_RPC_PORT:8332 -name $BITCOIND_NODE_CONTAINER_NAME"
+  START="$START -d -p $HOST_BITCOIND_P2P_PORT:8333 -p $HOST_BITCOIND_RPC_PORT:8332 -name $BITCOIND_NODE_CONTAINER_NAME"
 fi
 if [ "$1" = "rpc" ]; then
-    START="$START -d=false -rm -link $BITCOIND_NODE_CONTAINER_NAME:bitcoind -name $BITCOIND_RPC_CONTAINER_NAME"
+  START="$START -d=false -link $BITCOIND_NODE_CONTAINER_NAME:bitcoind -name $BITCOIND_RPC_CONTAINER_NAME"
 fi
 
 set -x
-exec $START binaryage/electrum-bitcoind $@
+exec $START binaryage/bitcoind $@

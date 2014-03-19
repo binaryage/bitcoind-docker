@@ -1,8 +1,4 @@
-# Docker-ized Electrum server
-
-[Electrum](http://electrum.org) is a great light-weight Bitcoin client. It connects to dozen servers provided by enthustiasts.
-
-This is an easy way how to run your own Electrum server and help to diversify Bitcoin infrastructure.
+# Docker-ized bitcoind server
 
 # Installation
 
@@ -11,20 +7,19 @@ This is an easy way how to run your own Electrum server and help to diversify Bi
 * grab some VPS (tested Digital Ocean with Ubuntu 13.10) - min 30GB disk, 2GB mem
 * [install Docker](https://www.docker.io/gettingstarted/#h_installation)
 * don't worry about losing containers, all esential data will be persistent in main host filesystem
-  * technically essential data folders will be mapped via docker volumes to `/var/lib/electrum-server-docker/*`
-    * bitcoind's database, electrum's data, leveldb and cerificates
+  * technically essential data folders will be mapped via docker volumes to `/var/lib/bitcoind-docker/*`
+    * bitcoind's database, leveldb, ...
 
 #### Installation
 
 Following script will build and add two new containers in your docker:
 
-1. electrum-bitcoind ([bitcoind](https://github.com/bitcoin/bitcoin) with mapped database to host's `/var/lib/electrum-server-docker/bitcoind`)
-2. electrum-server ([electrum-server](https://github.com/spesmilo/electrum-server) with mapped database to host's `/var/lib/electrum-server-docker/electrum/*`)
+1. electrum-bitcoind ([bitcoind](https://github.com/bitcoin/bitcoin) with mapped database to host's `/var/lib/bitcoind-docker/bitcoind`)
 
 Steps:
 
-    git clone git@github.com:binaryage/electrum-server-docker.git
-    cd electrum-server-docker
+    git clone git@github.com:binaryage/bitcoind-docker.git
+    cd bitcoind-docker
     touch .env
     echo "export BITCOIND_RPC_USER=some_user" >> .env
     echo "export BITCOIND_RPC_PASSWORD=some_password" >> .env
@@ -53,7 +48,6 @@ Note: Inspect etc/env and see more overrides you can add to your custom .env
 ## Credits
 
 * Docker is awesome!
-* Electrum guys rock
 * Inspiration from [srid's discourse-docker](https://github.com/srid/discourse-docker)
 
 [Licensed under MIT](LICENSE)
