@@ -2,9 +2,12 @@
 
 export DOCKER_RUN_OPTS=
 
-# IP address of current host.
-#export HOSTIP=$(/sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}')
-export HOSTIP=$(/sbin/ifconfig | grep 'inet ' | grep -v '127.0.0.1' | head -n1 | awk '{print $2}')
+# IP address of current host
+if [ "$(uname)" == "Darwin" ]; then
+  export HOSTIP=$(/sbin/ifconfig | grep 'inet ' | grep -v '127.0.0.1' | head -n1 | awk '{print $2}')
+else
+  export HOSTIP=$(/sbin/ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}')
+fi
 
 export HOST_DATA_DIR_PREFIX="/var/lib/bitcoind-docker"
 export HOST_BITCOIND_DATA_DIR="$HOST_DATA_DIR_PREFIX/bitcoind"
