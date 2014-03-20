@@ -17,7 +17,7 @@ WORKDIR /tmp/bitcoin
 RUN ./autogen.sh
 RUN ./configure --disable-wallet
 RUN make
-RUN ln -s bitcoind /bin/bitcoind
+RUN ln -s src/bitcoind /bin/bitcoind
 
 ADD . /bitcoind
 WORKDIR /bitcoind
@@ -27,4 +27,8 @@ EXPOSE 8332
 
 ADD	enter /enter
 RUN	chmod +x /enter
+
+# just a check that bitcoind exists
+RUN file `which bitcoind`
+
 ENTRYPOINT ["/enter"]
