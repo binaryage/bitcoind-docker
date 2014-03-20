@@ -6,15 +6,14 @@
 
 * grab some VPS (tested Digital Ocean with Ubuntu 13.10) - min 30GB disk, 2GB mem
 * [install Docker](https://www.docker.io/gettingstarted/#h_installation)
-* don't worry about losing containers, all esential data will be persistent in main host filesystem
+* don't worry about losing containers, all esential data will be persistent in the main host filesystem
   * technically essential data folders will be mapped via docker volumes to `/var/lib/bitcoind-docker/*`
-    * bitcoind's database, leveldb, ...
 
 #### Installation
 
-Following script will build and add two new containers in your docker:
+Following script will build and add a new container in your docker:
 
-1. electrum-bitcoind ([bitcoind](https://github.com/bitcoin/bitcoin) with mapped database to host's `/var/lib/bitcoind-docker/bitcoind`)
+1. `binaryage/bitcoind` which is ([bitcoind](https://github.com/bitcoin/bitcoin) with mapped database to host's `/var/lib/bitcoind-docker/bitcoind`)
 
 Steps:
 
@@ -23,7 +22,6 @@ Steps:
     touch .env
     echo "export BITCOIND_RPC_USER=some_user" >> .env
     echo "export BITCOIND_RPC_PASSWORD=some_password" >> .env
-    ./do setup
     ./do build
     ./do run
 
@@ -44,6 +42,12 @@ Note: Inspect etc/env and see more overrides you can add to your custom .env
     ./do build
     ./do rm
     ./do run
+
+##### RPC
+
+    ./do rpc getinfo
+
+note: if you get error about connection to bitcoind, it may be that bitcoind is reindexing/parsing blockchaing at the beginning. Give it some time after you run/start the container.
 
 ## Credits
 
