@@ -13,9 +13,9 @@ No command specified. Valid commands include:
   * start: Start paused container
   * stop: Stop running container
   * run: Run the container
-  * rpc: Execute bitcoind rpc call (try> ./do rpc getinfo)
+  * rpc: Execute bitcoind RPC call (try> ./do rpc getinfo)
 
-See https://github.com/binaryage/electrum-server-docker for details.
+See https://github.com/binaryage/bitcoind-docker for details.
 EOF
   exit 1
 fi
@@ -24,7 +24,7 @@ fi
 
 if [ "$1" = "build" ]; then
   set -x
-  docker build -rm -t binaryage/bitcoind bitcoind
+  docker build --rm -t binaryage/bitcoind bitcoind
 elif [ "$1" == "rm" ]; then
   set -x
   docker rm $BITCOIND_NODE_CONTAINER_NAME
