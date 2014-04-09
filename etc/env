@@ -18,7 +18,7 @@ export BITCOIND_RPC_USER=
 export BITCOIND_RPC_PASSWORD=
 export BITCOIND_CONFIG=
 
-export BITCOIND_NODE_CONTAINER_NAME=bitcoind-node
+export BITCOIND_NODE_CONTAINER_NAME=bitcoind
 export BITCOIND_RPC_CONTAINER_NAME=bitcoind-rpc
 
 # Overrides.
