@@ -1,4 +1,4 @@
-FROM ubuntu:12.10
+FROM ubuntu:14.04
 MAINTAINER Antonin Hildebrand <antonin@binaryage.com>
 
 ENV BITCOIN_DOWNLOAD_VERSION 0.9.1
